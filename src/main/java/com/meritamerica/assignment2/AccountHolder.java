@@ -134,9 +134,9 @@ public class AccountHolder {
 	 * @return the CheckingAccount
 	 */
 	CheckingAccount addCheckingAccount(double openingBalance) {
-		System.out.println(" getCheckingBalance() : " + getCheckingBalance());
-		System.out.println(" getSavingsBalance() : " + getSavingsBalance());
-		System.out.println(" openingBalance: " + openingBalance);
+//		System.out.println(" getCheckingBalance() : " + getCheckingBalance());
+//		System.out.println(" getSavingsBalance() : " + getSavingsBalance());
+//		System.out.println(" openingBalance: " + openingBalance);
 		if(getCheckingBalance() + getSavingsBalance() + openingBalance >= MAX_COMBINED_BALANCE) {
 			System.out.println("Combined balance is: " + getCheckingBalance() + getSavingsBalance() + openingBalance);
 			System.out.println("Please wait until combined balance is under 250k!");
@@ -145,7 +145,7 @@ public class AccountHolder {
 		else {
 			CheckingAccount checkingAccount = new CheckingAccount(openingBalance);
 			System.out.println("Combined balance is: " + (getCheckingBalance() + getSavingsBalance() + openingBalance));
-			System.out.println("Checking account created: " + checkingAccount.toString());
+//			System.out.println("Checking account created, see below :" + checkingAccount.toString());
 			addCheckingAccount(checkingAccount);
 			return checkingAccount;
 		}
@@ -165,9 +165,9 @@ public class AccountHolder {
 		// }
 		else {
 			System.out.println("I am about to add checking accout to array");
-			MeritBank.addItemToArray(checkingAccount, checkingAccounts);
+			checkingAccounts = MeritBank.addAccToChkArray(checkingAccount, checkingAccounts);
 			numberOfCheckingAccounts++;
-			System.out.println("Size of checking Array is " + checkingAccounts.length);
+			System.out.println("Size of checking Array now  is " + checkingAccounts.length);
 			System.out.println("current number of accounts for acc holder: " + numberOfCheckingAccounts);
 		}
 		return checkingAccount;
@@ -306,9 +306,9 @@ public class AccountHolder {
 	}
 	
 	double combinedBalanceByType(BankAccount[] accounts, int numOfAccounts) {
-		System.out.println("combinedBalanceByType started: ");
-		System.out.println("accounts[] length: " + accounts.length);
-		System.out.println(" num of accounts: " + numOfAccounts);
+//		System.out.println("combinedBalanceByType started: ");
+//		System.out.println("accounts[] length: " + accounts.length);
+//		System.out.println(" num of accounts: " + numOfAccounts);
 		
 		double combinedBalance = 0;
 //		if (accounts.length == 0) {
