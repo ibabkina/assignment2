@@ -15,7 +15,7 @@ public class MeritBank {
 	static int numberOfCDOfferings = 0;
 	static CDOffering bestCDOffering;
 	static CDOffering secondBestCDOffering;
-	static long nextAccountNumber = 1;
+	static long nextAccountNumber = 0;
 	//static double totalBalances();
 	
 	public MeritBank() {}
@@ -36,6 +36,8 @@ public class MeritBank {
 	}
 	
 	static void addItemToArray (Object item, Object[] items) {
+		
+		System.out.println("Add the following item to array: " + item.toString());
 		Object[] temp = new Object[items.length + 1]; 
 		for(int i = 0; i < items.length; i++) {
 			temp[i] = items[i];

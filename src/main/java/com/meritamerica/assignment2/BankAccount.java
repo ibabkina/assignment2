@@ -8,11 +8,11 @@ package com.meritamerica.assignment2;
  *
  */
 
-import static java.lang.Math.*;
+//import static java.lang.Math.*;
 
 public abstract class BankAccount {
 	
-	private double balance;
+	protected double balance;
 	private double interestRate; 
 	private long accountNumber;
 	static Long[] accountNumbers = new Long[0];
@@ -39,11 +39,11 @@ public abstract class BankAccount {
 	 * @param balance
 	 */
 	public BankAccount(double balance, double interestRate) {
-		//super();
-		this.balance = balance;
+		this(balance);
+		//this.balance = balance;
 		this.interestRate = interestRate;
-		this.accountNumber = MeritBank.getNextAccountNumber();
-		MeritBank.addItemToArray(this.accountNumber, accountNumbers);
+		//this.accountNumber = MeritBank.getNextAccountNumber();
+		//MeritBank.addItemToArray(this.accountNumber, accountNumbers);
 	}
 	
 	
@@ -80,9 +80,9 @@ public abstract class BankAccount {
 	/**
 	 * @return the interestRate
 	 */
-	public double getInterestRate() {
-		return interestRate;
-	}
+	abstract public double getInterestRate();// {
+//		return interestRate;
+//	}
 	
 	/**
 	 * @param amount
@@ -114,9 +114,9 @@ public abstract class BankAccount {
 	 * @param years: number of periods in years
 	 * @return the future value
 	 */
-	double futureValue(int years) {
-		return balance * pow(1 + interestRate, years); 
-	}
+	abstract double futureValue(int years); // {
+//		return balance * pow(1 + interestRate, years); 
+//	}
 
 	@Override
 	public String toString() {

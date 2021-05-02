@@ -16,8 +16,8 @@ public class AccountHolder {
 	private String middleName;
 	private String lastName;
 	private String ssn; //Social Security Number
-	private CheckingAccount checkingAccount;
-	private SavingsAccount savingsAccount;
+	//private CheckingAccount checkingAccount;
+	//private SavingsAccount savingsAccount;
 	private CDAccount cdAccount;
 	//private static final int MAX_SIZE = 500;
 	private static final double MAX_COMBINED_BALANCE = 250000.00;
@@ -136,15 +136,19 @@ public class AccountHolder {
 	CheckingAccount addCheckingAccount(double openingBalance) {
 		System.out.println(" getCheckingBalance() : " + getCheckingBalance());
 		System.out.println(" getSavingsBalance() : " + getSavingsBalance());
-//		if(getCheckingBalance() + getSavingsBalance() + openingBalance >= MAX_COMBINED_BALANCE) {
-//			System.out.println("Please wait until combined balance is under 250k!");
-//			return null;
-//		}
-//		else {
-//			checkingAccount = new CheckingAccount(openingBalance);
-//			addCheckingAccount(checkingAccount);
+		System.out.println(" openingBalance: " + openingBalance);
+		if(getCheckingBalance() + getSavingsBalance() + openingBalance >= MAX_COMBINED_BALANCE) {
+			System.out.println("Combined balance is: " + getCheckingBalance() + getSavingsBalance() + openingBalance);
+			System.out.println("Please wait until combined balance is under 250k!");
+			return null;
+		}
+		else {
+			CheckingAccount checkingAccount = new CheckingAccount(openingBalance);
+			System.out.println("Combined balance is: " + (getCheckingBalance() + getSavingsBalance() + openingBalance));
+			System.out.println("Checking account created: " + checkingAccount.toString());
+			addCheckingAccount(checkingAccount);
 			return checkingAccount;
-		//}
+		}
 	}
 	
 	/**
@@ -160,8 +164,11 @@ public class AccountHolder {
 			//checkingAccounts[numberOfCheckingAccounts++] = checkingAccount;
 		// }
 		else {
+			System.out.println("I am about to add checking accout to array");
 			MeritBank.addItemToArray(checkingAccount, checkingAccounts);
 			numberOfCheckingAccounts++;
+			System.out.println("Size of checking Array is " + checkingAccounts.length);
+			System.out.println("current number of accounts for acc holder: " + numberOfCheckingAccounts);
 		}
 		return checkingAccount;
 	}
@@ -192,12 +199,15 @@ public class AccountHolder {
 	 * @return the SavingsAccount
 	 */
 	SavingsAccount addSavingsAccount(double openingBalance) {
+		System.out.println(" getCheckingBalance() : " + getCheckingBalance());
+		System.out.println(" getSavingsBalance() : " + getSavingsBalance());
+		System.out.println(" openingBalance: " + openingBalance);
 		if(getCheckingBalance() + getSavingsBalance() + openingBalance >= MAX_COMBINED_BALANCE) {
 			System.out.println("Please wait until combined balance is under 250k!");
 			return null;
 		}
 		else {
-			savingsAccount = new SavingsAccount(openingBalance);
+			SavingsAccount savingsAccount = new SavingsAccount(openingBalance);
 			addSavingsAccount(savingsAccount); 
 			return savingsAccount;
 		}
@@ -296,15 +306,19 @@ public class AccountHolder {
 	}
 	
 	double combinedBalanceByType(BankAccount[] accounts, int numOfAccounts) {
+		System.out.println("combinedBalanceByType started: ");
+		System.out.println("accounts[] length: " + accounts.length);
+		System.out.println(" num of accounts: " + numOfAccounts);
 		
 		double combinedBalance = 0;
 //		if (accounts.length == 0) {
 //			return 0;
 //		}
-		for (int i = 0; i < numOfAccounts; i++) {
+		for (int i = 0; i < accounts.length; i++) {   // Was numOfAccounts - gave us error
+			System.out.println("Balance of the " + i + "element of array: " + accounts[i].getBalance());
 			combinedBalance += accounts[i].getBalance();
+			System.out.println("combined balance plus " + i + "th element of array: " + combinedBalance);
 		}
-		System.out.println("number of account for acc holder: " + numOfAccounts);
 		return combinedBalance;
 	}
 	

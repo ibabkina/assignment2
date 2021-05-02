@@ -36,4 +36,10 @@ public class CDOffering {
 	public void setInterestRate(double interestRate) {
 		this.interestRate = interestRate;
 	}
+	
+	@Override
+	public String toString() {
+		return "\nCD Offering Term : " + this.getTerm()
+		+ "\nCD Offering Rate : " + this.getInterestRate();
+	}
 }
