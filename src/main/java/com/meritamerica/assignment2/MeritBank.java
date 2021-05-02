@@ -21,7 +21,7 @@ public class MeritBank {
 	public MeritBank() {}
 	
 	static void addAccountHolder(AccountHolder accountHolder) {
-		addItemToArray(accountHolder, accountHolders);
+		accountHolders = addToAccHoldArray(accountHolder, accountHolders);
 		numberOfAccountHolders++;
 		
 //		if (numberOfAccountHolders < MAX_SIZE) {
@@ -35,7 +35,7 @@ public class MeritBank {
 		return accountHolders;
 	}
 	
-static CheckingAccount[] addAccToChkArray (CheckingAccount item, CheckingAccount[] items) {
+	static CheckingAccount[] addAccToChkArray (CheckingAccount item, CheckingAccount[] items) {
 		System.out.println("Here");
 		System.out.println("Add the following item to array: " + item.toString());
 		System.out.println("\n\n\n\n");
@@ -51,6 +51,38 @@ static CheckingAccount[] addAccToChkArray (CheckingAccount item, CheckingAccount
 	}
 	
 
+	static SavingsAccount[] addAccToSavArray (SavingsAccount item, SavingsAccount[] items) {
+		System.out.println("Here");
+		System.out.println("Add the following item to array: " + item.toString());
+		System.out.println("\n\n");
+		SavingsAccount[] temp = new SavingsAccount[items.length + 1]; 
+		for(int i = 0; i < items.length; i++) {
+			temp[i] = items[i];
+			}
+		temp[temp.length - 1] = item;
+		items = temp;
+		
+		System.out.println("Size of savings Array inside add account to sav array now  is:" + items.length);
+		return items;
+	}
+
+
+
+	static AccountHolder[] addToAccHoldArray (AccountHolder item, AccountHolder[] items) {
+		System.out.println("Here");
+		System.out.println("Add the following item to array: " + item.toString());
+		System.out.println("\n\n");
+		AccountHolder[] temp = new AccountHolder[items.length + 1]; 
+		for(int i = 0; i < items.length; i++) {
+			temp[i] = items[i];
+			}
+		temp[temp.length - 1] = item;
+		items = temp;
+		
+		System.out.println("Size of account holder Array inside add to account holder array now  is:" + items.length);
+		return items;
+	}
+
 	static void addItemToArray (Object item, Object[] items) {
 		
 		System.out.println("Add the following item to array: " + item.toString());
@@ -60,6 +92,21 @@ static CheckingAccount[] addAccToChkArray (CheckingAccount item, CheckingAccount
  		}
 		temp[temp.length - 1] = item;
 		items = temp;
+	}
+	
+	static CDAccount[] addToCDAccArray (CDAccount item, CDAccount[] items) {
+		System.out.println("Here");
+		System.out.println("Add the following item to array: " + item.toString());
+		System.out.println("\n\n\n\n");
+		CDAccount[] temp = new CDAccount[items.length + 1]; 
+		for(int i = 0; i < items.length; i++) {
+			temp[i] = items[i];
+ 		}
+		temp[temp.length - 1] = item;
+		items = temp;
+		
+		System.out.println("Size of cd Array inside add account to cd array now  is:" + items.length);
+		return items;
 	}
 	//dynamic size
 //	static boolean addItemToArray (Object item, Object[] items) {

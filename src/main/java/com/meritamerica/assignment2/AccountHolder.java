@@ -223,7 +223,7 @@ public class AccountHolder {
 			return null;
 		}
 		else {
-			MeritBank.addItemToArray(savingsAccount, savingsAccounts);
+			savingsAccounts = MeritBank.addAccToSavArray(savingsAccount, savingsAccounts);
 			numberOfSavingsAccounts++;
 		}
 		return savingsAccount;
@@ -270,7 +270,7 @@ public class AccountHolder {
 //		}
 //		else 
 //			System.out.println("Need more room for a new cd account");
-		MeritBank.addItemToArray(cdAccount, cdAccounts);
+		cdAccounts = MeritBank.addToCDAccArray(cdAccount, cdAccounts);
 		numberOfCDAccounts++;
 		return cdAccount;
 	}
