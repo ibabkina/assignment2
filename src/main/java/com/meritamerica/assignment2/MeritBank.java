@@ -8,38 +8,52 @@ import java.util.Random;
 //import com.meritamerica.assignment1.AccountHolder;
 
 public class MeritBank {
-	private static final int MAX_SIZE = 1000;
-	static AccountHolder[] accountHolders = new AccountHolder[MAX_SIZE]; 
+	//private static final int MAX_SIZE = 1000;
+	static AccountHolder[] accountHolders = new AccountHolder[0]; 
 	static CDOffering[] cdOfferings; // = new CDOffering[MAX_SIZE]; 
 	static int numberOfAccountHolders = 0;
 	static int numberOfCDOfferings = 0;
 	static CDOffering bestCDOffering;
 	static CDOffering secondBestCDOffering;
-	static long nextAccountNumber;
+	static long nextAccountNumber = 1;
 	//static double totalBalances();
 	
 	public MeritBank() {}
 	
 	static void addAccountHolder(AccountHolder accountHolder) {
+		addItemToArray(accountHolder, accountHolders);
+		numberOfAccountHolders++;
 		
-		//accountHolders = Arrays.copyOf(accountHolders, accountHolders.length +1);
-		
-		//dynamic size
-		AccountHolder[] temp = Arrays.copyOf(accountHolders, accountHolders.length +1);
-		temp[temp.length - 1] = accountHolder;
-		accountHolders = temp;
-		
-		
-		if (numberOfAccountHolders < MAX_SIZE) {
-			accountHolders[numberOfAccountHolders++] = accountHolder;
-		}
-		else 
-			System.out.println("Need more room for a new account holder");	
+//		if (numberOfAccountHolders < MAX_SIZE) {
+//			accountHolders[numberOfAccountHolders++] = accountHolder;
+//		}
+//		else 
+//			System.out.println("Need more room for a new account holder");	
 	}
 	
 	static AccountHolder[]getAccountHolders() {
 		return accountHolders;
 	}
+	
+	static void addItemToArray (Object item, Object[] items) {
+		Object[] temp = new Object[items.length + 1]; 
+		for(int i = 0; i < items.length; i++) {
+			temp[i] = items[i];
+ 		}
+		temp[temp.length - 1] = item;
+		items = temp;
+	}
+
+	//dynamic size
+//	static boolean addItemToArray (Object item, Object[] items) {
+//		Object[] temp = Arrays.copyOf(items, items.length + 1);	
+//		temp[temp.length - 1] = item;
+//		items = temp;
+//		return true; }
+	
+			
+
+		
 	
 	/**
 	 * @return the cdOfferings
@@ -68,7 +82,7 @@ public class MeritBank {
 	}
 	
 	public static void clearCDOfferings() {
-		cdOfferings = new CDOffering[MAX_SIZE]; 
+		cdOfferings = new CDOffering[0]; 
 		//DOffering bestCDOffering; ?
 		//CDOffering secondBestCDOffering; ?
 	}
@@ -99,13 +113,41 @@ public class MeritBank {
 	 * @return the nextAccountNumber
 	 */
 	public static long getNextAccountNumber() {
+		nextAccountNumber++;
+		
+//		Random rand = new Random();
+//		boolean success = false;
+//		
+//		while(success) {
+//			long nextAccountNumber = rand.nextLong();
+//			for(long an : BankAccount.accountNumbers) {
+//				if(nextAccountNumber != an) {
+//					success = true;
+//					//return nextAccountNumber;
+//				}
+//				break;
+//			}
+//		}
 		return nextAccountNumber;
 	}
+						
+			
+//		}
+//			if(nextAccountNumber != an)
+//				return n
+//			else
+//				nextAccountNumber
+//		}return nextAccountNumber;
+//	}
 
 //	
 
 	static double totalBalances() {
-		return
+		double balance = 0.0;
+		for(AccountHolder ah : accountHolders) {
+			balance += ah.getCombinedBalance();
+		}
+		return balance;
 	}
 	
 	/**
@@ -115,7 +157,7 @@ public class MeritBank {
 	 * @return the future value
 	 */
 	static double futureValue(double presentValue, double interestRate, int term) {
-		return balance * pow(1 + interestRate, term); 
+		return presentValue * pow(1 + interestRate, term); 
 	}
 	
 }

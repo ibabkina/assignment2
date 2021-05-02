@@ -15,7 +15,8 @@ public abstract class BankAccount {
 	private double balance;
 	private double interestRate; 
 	private long accountNumber;
-	
+	static Long[] accountNumbers = new Long[0];
+		
 	
 /*	/**
 	 * 
@@ -30,6 +31,8 @@ public abstract class BankAccount {
 	 */
 	public BankAccount(double openingBalance) {
 		this.balance = openingBalance;
+		this.accountNumber = MeritBank.getNextAccountNumber();
+		MeritBank.addItemToArray(this.accountNumber, accountNumbers);
 	}
 	
 	/**
@@ -39,14 +42,25 @@ public abstract class BankAccount {
 		//super();
 		this.balance = balance;
 		this.interestRate = interestRate;
+		this.accountNumber = MeritBank.getNextAccountNumber();
+		MeritBank.addItemToArray(this.accountNumber, accountNumbers);
 	}
 	
 	
 	public BankAccount(long accountNumber, double balance, double interestRate) {
 		//super();
-		this.accountNumber = accountNumber;
+		
 		this.balance = balance;
 		this.interestRate = interestRate;
+		for(long an : accountNumbers)
+			if(an != accountNumber) {
+				this.accountNumber = accountNumber;
+				MeritBank.addItemToArray(accountNumber, accountNumbers);
+			}
+			else {
+				this.accountNumber = MeritBank.getNextAccountNumber();
+				MeritBank.addItemToArray(accountNumber, accountNumbers);
+			}
 	}
 	
 	/**
@@ -106,8 +120,8 @@ public abstract class BankAccount {
 
 	@Override
 	public String toString() {
-		return "\nChecking Account Balance: $" + String.format("%.2f", this.getBalance())
-		+ "\nChecking Account Interest Rate: " + String.format("%.4f", this.getInterestRate())
-		+ "\nChecking Account Balance in 3 years: " + String.format("%.2f", this.futureValue(3));
+		return "\nAccount Balance: $" + String.format("%.2f", this.getBalance())
+		+ "\nAccount Interest Rate: " + String.format("%.4f", this.getInterestRate())
+		+ "\nAccount Balance in 3 years: " + String.format("%.2f", this.futureValue(3));
 	}		
 }	

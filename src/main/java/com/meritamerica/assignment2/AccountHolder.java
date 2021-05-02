@@ -19,11 +19,11 @@ public class AccountHolder {
 	private CheckingAccount checkingAccount;
 	private SavingsAccount savingsAccount;
 	private CDAccount cdAccount;
-	private static final int MAX_SIZE = 500;
+	//private static final int MAX_SIZE = 500;
 	private static final double MAX_COMBINED_BALANCE = 250000.00;
-	CheckingAccount[] checkingAccounts = new CheckingAccount[MAX_SIZE]; 
-	SavingsAccount[] savingsAccounts = new SavingsAccount[MAX_SIZE];
-	CDAccount[] cdAccounts = new CDAccount[MAX_SIZE]; 
+	CheckingAccount[] checkingAccounts = new CheckingAccount[0]; 
+	SavingsAccount[] savingsAccounts = new SavingsAccount[0];
+	CDAccount[] cdAccounts = new CDAccount[0]; 
 	int numberOfCheckingAccounts = 0;
 	int numberOfSavingsAccounts = 0;
 	int numberOfCDAccounts = 0;
@@ -134,15 +134,17 @@ public class AccountHolder {
 	 * @return the CheckingAccount
 	 */
 	CheckingAccount addCheckingAccount(double openingBalance) {
-		if(getCheckingBalance() + getSavingsBalance() >= MAX_COMBINED_BALANCE) {
-			System.out.println("Please wait until combined balance is under 250k!");
-			return null;
-		}
-		else {
-			checkingAccount = new CheckingAccount(openingBalance);
-			addCheckingAccount(checkingAccount); 
+		System.out.println(" getCheckingBalance() : " + getCheckingBalance());
+		System.out.println(" getSavingsBalance() : " + getSavingsBalance());
+//		if(getCheckingBalance() + getSavingsBalance() + openingBalance >= MAX_COMBINED_BALANCE) {
+//			System.out.println("Please wait until combined balance is under 250k!");
+//			return null;
+//		}
+//		else {
+//			checkingAccount = new CheckingAccount(openingBalance);
+//			addCheckingAccount(checkingAccount);
 			return checkingAccount;
-		}
+		//}
 	}
 	
 	/**
@@ -150,14 +152,16 @@ public class AccountHolder {
 	 * @return the CheckingAccount
 	 */
 	CheckingAccount addCheckingAccount(CheckingAccount checkingAccount) {
-		if (numberOfCheckingAccounts >= MAX_SIZE) 
-			System.out.println("Need more room for a new checking account");
-		else if(getCheckingBalance() + getSavingsBalance() >= MAX_COMBINED_BALANCE) {  
+		if(getCheckingBalance() + getSavingsBalance() + checkingAccount.getBalance() >= MAX_COMBINED_BALANCE) {  
 			System.out.println("Please wait until combined balance is under 250k!");
 			return null;
 		}
+	//	else {
+			//checkingAccounts[numberOfCheckingAccounts++] = checkingAccount;
+		// }
 		else {
-			checkingAccounts[numberOfCheckingAccounts++] = checkingAccount;
+			MeritBank.addItemToArray(checkingAccount, checkingAccounts);
+			numberOfCheckingAccounts++;
 		}
 		return checkingAccount;
 	}
@@ -188,7 +192,7 @@ public class AccountHolder {
 	 * @return the SavingsAccount
 	 */
 	SavingsAccount addSavingsAccount(double openingBalance) {
-		if(getCheckingBalance() + getSavingsBalance() >= MAX_COMBINED_BALANCE) {
+		if(getCheckingBalance() + getSavingsBalance() + openingBalance >= MAX_COMBINED_BALANCE) {
 			System.out.println("Please wait until combined balance is under 250k!");
 			return null;
 		}
@@ -204,14 +208,13 @@ public class AccountHolder {
 	 * @return the SavingAccount
 	 */
 	SavingsAccount addSavingsAccount(SavingsAccount savingsAccount) {
-		if (numberOfSavingsAccounts >= MAX_SIZE) 
-			System.out.println("Need more room for a new savings account");
-		else if(getCheckingBalance() + getSavingsBalance() >= MAX_COMBINED_BALANCE) {  
+		if(getCheckingBalance() + getSavingsBalance() + savingsAccount.getBalance() >= MAX_COMBINED_BALANCE) {  
 			System.out.println("Please wait until combined balance is under 250k!");
 			return null;
 		}
 		else {
-			savingsAccounts[numberOfSavingsAccounts++] = savingsAccount;
+			MeritBank.addItemToArray(savingsAccount, savingsAccounts);
+			numberOfSavingsAccounts++;
 		}
 		return savingsAccount;
 	}
@@ -252,11 +255,13 @@ public class AccountHolder {
 	 * @return the CheckingAccount
 	 */
 	CDAccount addCDAccount(CDAccount cdAccount) {
-		if (numberOfCDAccounts < MAX_SIZE) {
-		cdAccounts[numberOfCDAccounts++] = cdAccount; 
-		}
-		else 
-			System.out.println("Need more room for a new cd account");
+//		if (numberOfCDAccounts < MAX_SIZE) {
+//		cdAccounts[numberOfCDAccounts++] = cdAccount; 
+//		}
+//		else 
+//			System.out.println("Need more room for a new cd account");
+		MeritBank.addItemToArray(cdAccount, cdAccounts);
+		numberOfCDAccounts++;
 		return cdAccount;
 	}
 
@@ -290,12 +295,17 @@ public class AccountHolder {
 				+ combinedBalanceByType(cdAccounts, numberOfCDAccounts); 
 	}
 	
-	double combinedBalanceByType(BankAccount[] accounts, int num) {
-		double sum = 0;
-		for (int i = 0; i <= num; i++) {
-			sum += accounts[i].getBalance();
+	double combinedBalanceByType(BankAccount[] accounts, int numOfAccounts) {
+		
+		double combinedBalance = 0;
+//		if (accounts.length == 0) {
+//			return 0;
+//		}
+		for (int i = 0; i < numOfAccounts; i++) {
+			combinedBalance += accounts[i].getBalance();
 		}
-		return sum;
+		System.out.println("number of account for acc holder: " + numOfAccounts);
+		return combinedBalance;
 	}
 	
 	
