@@ -10,7 +10,7 @@ import java.util.Random;
 public class MeritBank {
 	//private static final int MAX_SIZE = 1000;
 	static AccountHolder[] accountHolders = new AccountHolder[0]; 
-	static CDOffering[] cdOfferings; // = new CDOffering[MAX_SIZE]; 
+	static CDOffering[] cdOfferings; // = new CDOffering[0];
 	static int numberOfAccountHolders = 0;
 	static int numberOfCDOfferings = 0;
 	static CDOffering bestCDOffering;
@@ -36,9 +36,9 @@ public class MeritBank {
 	}
 	
 	static CheckingAccount[] addAccToChkArray (CheckingAccount item, CheckingAccount[] items) {
-		System.out.println("Here");
-		System.out.println("Add the following item to array: " + item.toString());
-		System.out.println("\n\n\n\n");
+//		System.out.println("Here");
+//		System.out.println("Add the following item to array: " + item.toString());
+//		System.out.println("\n\n\n\n");
 		CheckingAccount[] temp = new CheckingAccount[items.length + 1]; 
 		for(int i = 0; i < items.length; i++) {
 			temp[i] = items[i];
@@ -46,15 +46,15 @@ public class MeritBank {
 		temp[temp.length - 1] = item;
 		items = temp;
 		
-		System.out.println("Size of checking Array inside add account to chk array now  is:" + items.length);
+//		System.out.println("Size of checking Array inside add account to chk array now  is:" + items.length);
 		return items;
 	}
 	
 
 	static SavingsAccount[] addAccToSavArray (SavingsAccount item, SavingsAccount[] items) {
-		System.out.println("Here");
-		System.out.println("Add the following item to array: " + item.toString());
-		System.out.println("\n\n");
+//		System.out.println("Here");
+//		System.out.println("Add the following item to array: " + item.toString());
+//		System.out.println("\n\n");
 		SavingsAccount[] temp = new SavingsAccount[items.length + 1]; 
 		for(int i = 0; i < items.length; i++) {
 			temp[i] = items[i];
@@ -69,9 +69,9 @@ public class MeritBank {
 
 
 	static AccountHolder[] addToAccHoldArray (AccountHolder item, AccountHolder[] items) {
-		System.out.println("Here");
-		System.out.println("Add the following item to array: " + item.toString());
-		System.out.println("\n\n");
+//		System.out.println("Here");
+//		System.out.println("Add the following item to array: " + item.toString());
+//		System.out.println("\n\n");
 		AccountHolder[] temp = new AccountHolder[items.length + 1]; 
 		for(int i = 0; i < items.length; i++) {
 			temp[i] = items[i];
@@ -95,9 +95,9 @@ public class MeritBank {
 	}
 	
 	static CDAccount[] addToCDAccArray (CDAccount item, CDAccount[] items) {
-		System.out.println("Here");
-		System.out.println("Add the following item to array: " + item.toString());
-		System.out.println("\n\n\n\n");
+//		System.out.println("Here");
+//		System.out.println("Add the following item to array: " + item.toString());
+//		System.out.println("\n\n\n\n");
 		CDAccount[] temp = new CDAccount[items.length + 1]; 
 		for(int i = 0; i < items.length; i++) {
 			temp[i] = items[i];
@@ -108,16 +108,6 @@ public class MeritBank {
 		System.out.println("Size of cd Array inside add account to cd array now  is:" + items.length);
 		return items;
 	}
-	//dynamic size
-//	static boolean addItemToArray (Object item, Object[] items) {
-//		Object[] temp = Arrays.copyOf(items, items.length + 1);	
-//		temp[temp.length - 1] = item;
-//		items = temp;
-//		return true; }
-	
-			
-
-		
 	
 	/**
 	 * @return the cdOfferings
@@ -131,9 +121,19 @@ public class MeritBank {
 	 * @return the bestCDOffering
 	 */
 	public static CDOffering getBestCDOffering(double depositAmount) {
-		
-	
-		return bestCDOffering;
+//		for(CDOffering cd : cdOfferings) {
+//		System.out.println(cdOfferings == null); //toString()); // is :" + cd);
+//		}
+		if (cdOfferings == null || MeritBank.cdOfferings.length <= 0) {
+			System.out.println("Sorry there are no offerings at this time");
+			return null;
+		}
+		CDOffering bestInterest = cdOfferings[0];
+		for(int i = 0; i < cdOfferings.length; i++) {
+			if(bestInterest.getInterestRate() < cdOfferings[i].getInterestRate())
+				bestInterest = cdOfferings[i];
+		}
+		return bestInterest;
 	}
 
 	/**
@@ -141,12 +141,48 @@ public class MeritBank {
 	 * @return the secondBestCDOffering
 	 */
 	public static CDOffering getSecondBestCDOffering(double depositAmount) {
+		
+		if (cdOfferings == null || MeritBank.cdOfferings.length <= 0) {
+			System.out.println("Sorry there are no offerings at this time");
+			return null;
+		}
+		CDOffering temp;
+	      //sort the array
+	      for (int i = 0; i < cdOfferings.length; i++) {
+	         for (int j = i + 1; j < cdOfferings.length; j++) {
+	            if (cdOfferings[i].getInterestRate() > cdOfferings[j].getInterestRate()) {
+	               temp = cdOfferings[i];
+	               cdOfferings[i] = cdOfferings[j];
+	               cdOfferings[j] = temp;
+	            }
+	         }
+	      }
+	      //return second largest element
+	      return cdOfferings[cdOfferings.length - 2];
+		
 	
-		return secondBestCDOffering;
+		
+		
+		
+		
+		
+//		for(int i = 0; i < cdOfferings.length; i++) {
+//			if(bestInterest.getInterestRate() < cdOfferings[i].getInterestRate())
+//				bestInterest = cdOfferings[i];
+//			
+//		}
+//		CDOffering bestInterest = cdOfferings[0];
+//		for(int i = 0; i < cdOfferings.length; i++) {
+//			if(bestInterest.getInterestRate() < cdOfferings[i].getInterestRate())
+//				bestInterest = cdOfferings[i];
+//		}
+//		return bestInterest;
+//		return secondBest;
+		
 	}
 	
 	public static void clearCDOfferings() {
-		cdOfferings = new CDOffering[0]; 
+		cdOfferings = null; //new CDOffering[0]; 
 		//DOffering bestCDOffering; ?
 		//CDOffering secondBestCDOffering; ?
 	}
