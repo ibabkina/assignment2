@@ -1,12 +1,21 @@
 package com.meritamerica.assignment2;
 
+/**
+ * This program creates a savings account for a client.
+ * 
+ * @author Irina Babkina 
+ * 
+ */
+
 import static java.lang.Math.pow;
 
 public class SavingsAccount extends BankAccount {
 	
-	//private double balance;
 	private double interestRate = 0.01;
 	
+	/**
+	 * @param openingBalance
+	 */
 	public SavingsAccount(double openingBalance) {
 		super(openingBalance);
 	}
@@ -31,8 +40,8 @@ public class SavingsAccount extends BankAccount {
 	@Override
 	public String toString() {
 		return "\nSavings Account Number: " + this.getAccountNumber()
-		+ "\nSavings Account Balance: $" + String.format("%.2f", this.getBalance())
-		+ "\nSavings Account Interest Rate: " + String.format("%.4f", this.getInterestRate())
-		+ "\nSavings Account Balance in 3 years: " + String.format("%.2f", this.futureValue(3));
+			+ "\nSavings Account Balance: $" + String.format("%.2f", this.getBalance())
+			+ "\nSavings Account Interest Rate: " + String.format("%.4f", this.getInterestRate())
+			+ "\nSavings Account Balance in 3 years: " + String.format("%.2f", this.futureValue(3));
 	}		
 }

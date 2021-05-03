@@ -1,19 +1,28 @@
 package com.meritamerica.assignment2;
 
+/**
+ * This program creates a CD account for a client.
+ * 
+ * @author Irina Babkina 
+ * 
+ */
+
 import static java.lang.Math.pow;
 
 import java.util.Date;
 
 public class CDAccount extends BankAccount{
 	
-	//private double balance;
-	//private CDOffering cdOffering;
 	private double interestRate;
 	private int term;
 	Date date = new Date();
 	
+	/**
+	 * @param offering
+	 * @param openingBalance 
+	 */
 	public CDAccount(CDOffering offering, double openingBalance) {
-		super(openingBalance); //, offering.getInterestRate());
+		super(openingBalance); 
 		this.term = offering.getTerm();
 		this.interestRate = offering.getInterestRate();
 	}
@@ -33,10 +42,10 @@ public class CDAccount extends BankAccount{
 	}
 
 	/**
-	 * @return the term
+	 * @return the data: java.util.Date
 	 */
 	java.util.Date getStartDate() {
-		System.out.println("Date " + date);
+//		System.out.println("Date " + date);
 		return date;
 	}
 	
@@ -53,12 +62,10 @@ public class CDAccount extends BankAccount{
 	@Override
 	public String toString() {
 		return "\nCD Account Number: " + this.getAccountNumber()
-		+ "\nCD Account Balance: $" + String.format("%.2f", this.getBalance())
-		+ "\nCD Account Interest Rate: " + String.format("%.4f", this.getInterestRate())
-		+ "\nCD Account Term: " + this.getTerm()
-		+ "\nCD Account Start Date: " + this.getStartDate()
-		+ "\nCD Account Balance in " + this.getTerm() + " years: " + String.format("%.2f", this.futureValue(this.getTerm()));
+			+ "\nCD Account Balance: $" + String.format("%.2f", this.getBalance())
+			+ "\nCD Account Interest Rate: " + String.format("%.4f", this.getInterestRate())
+			+ "\nCD Account Term: " + this.getTerm()
+			+ "\nCD Account Start Date: " + this.getStartDate()
+			+ "\nCD Account Balance in " + this.getTerm() + " years: " + String.format("%.2f", this.futureValue(this.getTerm()));
 	}
-
-
 }

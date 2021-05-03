@@ -1,22 +1,24 @@
 package com.meritamerica.assignment2;
 
-
-
+/**
+ * This program creates a checking account for a client.
+ * 
+ * @author Irina Babkina 
+ * 
+ */
+ 
 import static java.lang.Math.*;
 
 public class CheckingAccount extends BankAccount {
 	
-	//private double balance;
 	private double interestRate = 0.0001;
 	
+	/**
+	 * @param openingBalance
+	 */
 	public CheckingAccount(double openingBalance){
 		super(openingBalance);
 	}
-	
-//	public CheckingAccount(double openingBalance, double interestRate){
-//		super(openingBalance);
-//		this.interestRate = interestRate;
-//	}
 	
 	/**
 	 * @return the interestRate
@@ -35,12 +37,11 @@ public class CheckingAccount extends BankAccount {
 		return this.balance * pow(1 + interestRate, years); 
 	}
 
-	
 	@Override
 	public String toString() {
 		return "\nChecking Account Number: " + this.getAccountNumber()
-		+ "\nChecking Account Balance: $" + String.format("%.2f", this.getBalance())
-		+ "\nChecking Account Interest Rate: " + String.format("%.4f", this.getInterestRate())
-		+ "\nChecking Account Balance in 3 years: " + String.format("%.2f", this.futureValue(3));
+			+ "\nChecking Account Balance: $" + String.format("%.2f", this.getBalance())
+			+ "\nChecking Account Interest Rate: " + String.format("%.4f", this.getInterestRate())
+			+ "\nChecking Account Balance in 3 years: " + String.format("%.2f", this.futureValue(3));
 	}		
 }

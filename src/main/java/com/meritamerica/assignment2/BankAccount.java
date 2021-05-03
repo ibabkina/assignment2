@@ -1,15 +1,12 @@
-/**
- * 
- */
 package com.meritamerica.assignment2;
 
 /**
- * @author Irina Babkina
- *
+ * This program creates an account for a client.
+ * 
+ * @author Irina Babkina 
+ * 
  */
-
-//import static java.lang.Math.*;
-
+ 
 public abstract class BankAccount {
 	
 	protected double balance;
@@ -17,15 +14,6 @@ public abstract class BankAccount {
 	private long accountNumber;
 	static Long[] accountNumbers = new Long[0];
 		
-	
-/*	/**
-	 * 
-	 */
-//	public BankAccount() {
-//		// TODO Auto-generated constructor stub
-//	}
-	
-	
 	/**
 	 * @param openingBalance
 	 */
@@ -37,19 +25,19 @@ public abstract class BankAccount {
 	
 	/**
 	 * @param balance
+	 * @param interestRate 
 	 */
 	public BankAccount(double balance, double interestRate) {
 		this(balance);
-		//this.balance = balance;
 		this.interestRate = interestRate;
-		//this.accountNumber = MeritBank.getNextAccountNumber();
-		//MeritBank.addItemToArray(this.accountNumber, accountNumbers);
 	}
 	
-	
+	/**
+	 * @param accountNumber
+	 * @param balance
+	 * @param interestRate 
+	 */
 	public BankAccount(long accountNumber, double balance, double interestRate) {
-		//super();
-		
 		this.balance = balance;
 		this.interestRate = interestRate;
 		for(long an : accountNumbers)
@@ -80,9 +68,7 @@ public abstract class BankAccount {
 	/**
 	 * @return the interestRate
 	 */
-	abstract public double getInterestRate();// {
-//		return interestRate;
-//	}
+	abstract public double getInterestRate();
 	
 	/**
 	 * @param amount
@@ -114,14 +100,12 @@ public abstract class BankAccount {
 	 * @param years: number of periods in years
 	 * @return the future value
 	 */
-	abstract double futureValue(int years); // {
-//		return balance * pow(1 + interestRate, years); 
-//	}
+	abstract double futureValue(int years);
 
 	@Override
 	public String toString() {
 		return "\nAccount Balance: $" + String.format("%.2f", this.getBalance())
-		+ "\nAccount Interest Rate: " + String.format("%.4f", this.getInterestRate())
-		+ "\nAccount Balance in 3 years: " + String.format("%.2f", this.futureValue(3));
+			+ "\nAccount Interest Rate: " + String.format("%.4f", this.getInterestRate())
+			+ "\nAccount Balance in 3 years: " + String.format("%.2f", this.futureValue(3));
 	}		
 }	
